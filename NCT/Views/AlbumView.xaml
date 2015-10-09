@@ -33,9 +33,9 @@
             </phone:PivotItem>
 
             <!--Pivot item two-->
-            <phone:PivotItem x:Name="albumListViewPivotItem" Header="top album">
+            <phone:PivotItem x:Name="albumListViewPivotItem" Header="album list">
                 <Grid>
-                    <phone:LongListSelector x:Name="albumListView" ItemsSource="{Binding AlbumList}" SelectionChanged="albumListView_SelectionChanged">
+                    <phone:LongListSelector x:Name="albumListView" ItemRealized="albumListView_ItemRealized" ItemsSource="{Binding AlbumList}" SelectionChanged="albumListView_SelectionChanged">
                         <phone:LongListSelector.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel ManipulationStarted="StackPanel_ManipulationStarted" ManipulationCompleted="StackPanel_ManipulationCompleted" Orientation="Horizontal" Margin="12,2,0,4" Height="105" Width="432">
@@ -47,6 +47,14 @@
                                 </StackPanel>
                             </DataTemplate>
                         </phone:LongListSelector.ItemTemplate>
+                        <phone:LongListSelector.ListFooter>
+                            <Grid Margin="12,30,12,0" Height="60" VerticalAlignment="Bottom">
+                                <StackPanel VerticalAlignment="Center">
+                                    <TextBlock Text="Load more" />
+                                </StackPanel>
+                            </Grid>
+                        </phone:LongListSelector.ListFooter>
+
                     </phone:LongListSelector>
                 </Grid>
             </phone:PivotItem>

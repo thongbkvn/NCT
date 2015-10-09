@@ -10,6 +10,8 @@ namespace NCT.ViewModels
 {
     public class ListOfAlbumViewModel : ViewModel
     {
+        public string link;
+        int page = 0;
         private ObservableCollection<AlbumViewModel> albumList;
         public ObservableCollection<AlbumViewModel> AlbumList
         {
@@ -31,15 +33,24 @@ namespace NCT.ViewModels
         {
             albumList = new ObservableCollection<AlbumViewModel>();
         }
-        public async Task LoadData(string link, int page = 0)
+        public async Task LoadDataInit(string link)
         {
-            List<Album> listAlbum = await NhacCuaTui.GetListOfPlaylistAsync(link, page);
+            if (link == null)
+                return;
+            this.link = link;
+            List<Album> listAlbum = await NhacCuaTui.GetListOfPlaylistAsync(link, 0);
+            AlbumList.Clear();
             foreach (var album in listAlbum)
                 AlbumList.Add(new AlbumViewModel(album) { IsDataLoaded = false });
             IsDataLoaded = true;
         }
 
-        
+        public async Task LoadMore()
+        {
+            List<Album> listAlbum = await NhacCuaTui.GetListOfPlaylistAsync(link, ++page);
+            foreach (var album in listAlbum)
+                AlbumList.Add(new AlbumViewModel(album) { IsDataLoaded = false });
+        }
         public bool IsDataLoaded
         {
             get; set;

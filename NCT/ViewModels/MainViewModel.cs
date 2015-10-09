@@ -54,7 +54,7 @@ namespace NCT.ViewModels
             this.Items.Add(new ItemViewModel() { Content = "none lyric", NavigatePage = "http://www.nhaccuatui.com/playlist/khong-loi-moi.html" });
             this.Items.Add(new ItemViewModel() { Content = "soundtrack", NavigatePage = "http://www.nhaccuatui.com/playlist/nhac-phim-moi.html" });
             this.Items.Add(new ItemViewModel() { Content = "other", NavigatePage = "http://www.nhaccuatui.com/playlist/the-loai-khac-moi.html" });
-
+            IsDataLoaded = true;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

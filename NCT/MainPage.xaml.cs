@@ -38,7 +38,7 @@ namespace NCT
                 App.ViewModel.LoadMainView();
             }
             if (!App.FeaturesVM.IsDataLoaded)
-                await App.FeaturesVM.LoadData("http://www.nhaccuatui.com/playlist/playlist-moi.html", 0);
+                await App.FeaturesVM.LoadDataInit("http://www.nhaccuatui.com/playlist/playlist-moi.html");
         }
 
         private void collectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)

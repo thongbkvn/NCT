@@ -22,10 +22,11 @@ namespace NCT.Views
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            //base.OnNavigatedTo(e);
-            App.AlbumPlayView.LoadAlbumView();
+            base.OnNavigatedTo(e);
             if (!App.AlbumListView.IsDataLoaded)
-                await App.AlbumListView.LoadData("http://www.nhaccuatui.com/playlist/playlist-moi.html", 0);
+                App.AlbumPlayView.LoadAlbumView();
+            if (!App.AlbumListView.IsDataLoaded)
+                await App.AlbumListView.LoadDataInit("http://www.nhaccuatui.com/playlist/playlist-moi.html");
         }
 
         private async void albumGenreView_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -34,7 +35,7 @@ namespace NCT.Views
             if (lls.SelectedItem == null)
                 return;
             ItemViewModel item = lls.SelectedItem as ItemViewModel;
-            await App.AlbumListView.LoadData(item.NavigatePage, 0);
+            await App.AlbumListView.LoadDataInit(item.NavigatePage);
             albumViewPivot.SelectedIndex = 1;
         }
 
@@ -58,6 +59,10 @@ namespace NCT.Views
             (sender as StackPanel).Opacity = 1;
         }
 
-      
+        private async void albumListView_ItemRealized(object sender, ItemRealizationEventArgs e)
+        {
+            if (e.ItemKind == LongListSelectorItemKind.ListFooter)
+                await App.AlbumListView.LoadMore();
+        }
     }
 }
