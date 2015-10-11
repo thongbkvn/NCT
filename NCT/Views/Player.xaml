@@ -16,11 +16,11 @@
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <!--Pivot Control-->
-        <phone:Pivot Title="MY APPLICATION" Loaded="Pivot_Loaded">
+        <phone:Pivot x:Name="playerPivot" Title="MUSIC VN" Loaded="Pivot_Loaded">
             <!--Pivot item one-->
-            <phone:PivotItem Header="now playing">
+            <phone:PivotItem Header="playlist">
                 <Grid>
-                    <phone:LongListSelector x:Name="nowPlayingView" SelectionChanged="nowPlayingView_SelectionChanged" ItemsSource="{Binding TrackList}">
+                    <phone:LongListSelector x:Name="playlistView" SelectionChanged="playlistView_SelectionChanged" ItemsSource="{Binding TrackList}">
                         <phone:LongListSelector.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel ManipulationStarted="StackPanel_ManipulationStarted" ManipulationCompleted="StackPanel_ManipulationCompleted" Orientation="Horizontal" Margin="12,2,0,4" Height="80" Width="450">
@@ -37,7 +37,7 @@
             </phone:PivotItem>
 
             <!--Pivot item two-->
-            <phone:PivotItem Header="MusicVN">
+            <phone:PivotItem Header="nowplaying">
                 <Grid Name="musicVNView">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="2*"></RowDefinition>

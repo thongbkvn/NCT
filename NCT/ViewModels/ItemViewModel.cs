@@ -33,28 +33,28 @@ namespace NCT.ViewModels
             }
         }
 
-        private string navigatePage;
+        private string lineTwo;
         /// <summary>
         /// Sample ViewModel property; this property is used in the view to display its value using a Binding.
         /// </summary>
         /// <returns></returns>
-        public string NavigatePage
+        public string LineTwo
         {
             get
             {
-                return navigatePage;
+                return lineTwo;
             }
             set
             {
-                if (value != navigatePage)
+                if (value != lineTwo)
                 {
-                    navigatePage = value;
+                    lineTwo = value;
                     //NotifyPropertyChanged("LineTwo");
                 }
             }
         }
 
-        private string _lineThree;
+        private string lineThree;
         /// <summary>
         /// Sample ViewModel property; this property is used in the view to display its value using a Binding.
         /// </summary>
@@ -63,14 +63,14 @@ namespace NCT.ViewModels
         {
             get
             {
-                return _lineThree;
+                return lineThree;
             }
             set
             {
-                if (value != _lineThree)
+                if (value != lineThree)
                 {
-                    _lineThree = value;
-                    NotifyPropertyChanged("LineThree");
+                    lineThree = value;
+                   //NotifyPropertyChanged("LineThree");
                 }
             }
         }

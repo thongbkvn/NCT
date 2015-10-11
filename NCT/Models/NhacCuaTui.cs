@@ -12,6 +12,7 @@ namespace NCT.Models
 {
     public class NhacCuaTui
     {
+        public enum SearchType {All = 0, Album = 1, Song = 2, Singer = 4}
         public static async Task<Album> GetTopTrackListAsync(string link)
         {
             Album album = new Album();
@@ -143,6 +144,51 @@ namespace NCT.Models
                                    };
 
             return relatedTrackList.ToList();
+        }
+
+        public static async Task<List<Track>> GetTrackByGenreAsync(string link, int page)
+        {
+            if (page != 0)
+                link = link.Remove(link.Length-4) + page + ".html";
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.UserAgent.Add(new Windows.Web.Http.Headers.HttpProductInfoHeaderValue("Mozilla / 5.0(Windows NT 10.0; WOW64) AppleWebKit / 537.36(KHTML, like Gecko) Chrome / 45.0.2454.101 Safari / 537.36"));
+            string response = await client.GetStringAsync(new Uri(link));
+            client.Dispose();
+            HtmlDocument doc = new HtmlDocument();
+            doc.LoadHtml(response);
+
+            //Chon ra the chua danh sach bai hat
+            var trackList = from ultag in doc.DocumentNode.Descendants("ul").Where(x => x.Attributes["class"] != null && x.Attributes["class"].Value == "list_item_music")
+                        from litag in ultag.ChildNodes.Where(x => x.Name == "li")
+                        from h3tag in litag.ChildNodes[1].ChildNodes
+                         select new Track()
+                         {
+                             Title = h3tag.ChildNodes[0].InnerText,
+                             Info = h3tag.ChildNodes[0].Attributes["href"].Value,
+                             ArtistLink = h3tag.ChildNodes[2].Attributes["href"].Value,
+                             Artist = h3tag.ChildNodes[2].InnerText
+                         };    
+            return trackList.ToList();
+        }
+        public static void SearchingFor(string keyword, SearchType type)
+        {
+            string[] sarr = Regex.Split(keyword, "\b");
+            string querryString = "q=";
+            for (int i = 0; i < sarr.Length - 1; i++)
+                querryString += sarr + "+";
+            querryString += sarr[sarr.Length - 1];
+            switch (type)
+            {
+
+                case SearchType.All:
+                    querryString = "tim-kiem?" + querryString;
+                    break;
+                case SearchType.Album:
+                    querryString = "tim-kiem/playlist?" + querryString;
+                    break;
+                case SearchType.Song:
+                    break;
+            }
         }
         public static async Task<List<Album>> GetRelatedAlbumAsync(Album album)
         {

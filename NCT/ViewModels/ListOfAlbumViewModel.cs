@@ -45,6 +45,20 @@ namespace NCT.ViewModels
             IsDataLoaded = true;
         }
 
+        public async Task LoadDataFeature(string link, int numberOfItem)
+        {
+            if (link == null)
+                return;
+            this.link = link;
+            List<Album> listAlbum = await NhacCuaTui.GetListOfPlaylistAsync(link, 0);
+            AlbumList.Clear();
+            int i = 0;
+            foreach (var album in listAlbum)
+                if (i++ < numberOfItem)
+                    AlbumList.Add(new AlbumViewModel(album) { IsDataLoaded = false });
+            IsDataLoaded = true;
+        }
+
         public async Task LoadMore()
         {
             List<Album> listAlbum = await NhacCuaTui.GetListOfPlaylistAsync(link, ++page);

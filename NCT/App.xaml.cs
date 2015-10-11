@@ -38,6 +38,16 @@ namespace NCT
             }  
         }
 
+        private static TrackListViewModel songsView;
+        public static TrackListViewModel SongsView
+        {
+            get
+            {
+                if (songsView == null)
+                    songsView = new TrackListViewModel();
+                return songsView;
+            }
+        }
         private static TrackViewModel trackVM = null;
         public static TrackViewModel TrackVM
         {

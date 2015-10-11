@@ -66,7 +66,7 @@ namespace NCT.ViewModels
 
         public ObservableCollection<TrackViewModel> TrackList
         {
-            get; set;
+            get;
         }
 
 
@@ -92,8 +92,7 @@ namespace NCT.ViewModels
                 {
                     try
                     {
-                        TrackViewModel trackVM = new TrackViewModel();
-                        trackVM = new TrackViewModel(track);
+                        TrackViewModel trackVM = new TrackViewModel(track);
                         TrackList.Add(trackVM);
                     }
                     catch (Exception) { }

@@ -18,7 +18,8 @@ namespace NCT.Views
         public Player()
         {
             InitializeComponent();
-            nowPlayingView.DataContext = App.AlbumVM;
+            playlistView.DataContext = App.AlbumVM;
+            playerPivot.DataContext = App.AlbumVM;
             musicVNView.DataContext = App.TrackVM;
         }
 
@@ -40,7 +41,7 @@ namespace NCT.Views
             }
         }
 
-        private void nowPlayingView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void playlistView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             LongListSelector lls = sender as LongListSelector;
             if (lls.SelectedItem == null)

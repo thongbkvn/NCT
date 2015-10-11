@@ -28,17 +28,13 @@ namespace NCT
 
         // Load data for the ViewModel Items
         protected override async void OnNavigatedTo(NavigationEventArgs e)
-        {
-            //#region debug
-            //var track = new Track() { Info = "http://www.nhaccuatui.com/bai-hat/am-tham-ben-em-son-tung-m-tp.Sttn5Z5WPKPR.html" };
-            //var tmp = await NhacCuaTui.GetRelatedTrackListAsync(track);
-            //#endregion
+        {                                                                                              
             if (!App.ViewModel.IsDataLoaded)
             {
                 App.ViewModel.LoadMainView();
             }
             if (!App.FeaturesVM.IsDataLoaded)
-                await App.FeaturesVM.LoadDataInit("http://www.nhaccuatui.com/playlist/playlist-moi.html");
+                await App.FeaturesVM.LoadDataFeature("http://www.nhaccuatui.com/playlist/playlist-moi.html", 5);
         }
 
         private void collectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -46,7 +42,7 @@ namespace NCT
             LongListSelector lls = sender as LongListSelector;
             if (lls.SelectedItem == null)
                 return;
-            string pageLocation = (lls.SelectedItem as ItemViewModel).NavigatePage;
+            string pageLocation = (lls.SelectedItem as ItemViewModel).LineTwo;
             NavigationService.Navigate(new Uri(pageLocation, UriKind.Relative));
             lls.SelectedItem = null;
         }
@@ -69,6 +65,11 @@ namespace NCT
         private void StackPanel_ManipulationCompleted(object sender, System.Windows.Input.ManipulationCompletedEventArgs e)
         {
             (sender as StackPanel).Opacity = 1.0;
+        }
+
+        private void TextBlock_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {                                                                                                                          
+            NavigationService.Navigate(new Uri("/Views/GenreView.xaml?id=1", UriKind.Relative));
         }
     }
 }

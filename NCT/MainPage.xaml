@@ -39,23 +39,40 @@
 
             <!--HIEN THI NHUNG PLAYLIST NOI BAT-->
             <phone:PanoramaItem Header="features">
-                    <phone:LongListSelector x:Name="featuresView" ItemsSource="{Binding AlbumList}" SelectionChanged="featuresView_SelectionChanged">
-                        <phone:LongListSelector.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel ManipulationStarted="StackPanel_ManipulationStarted" ManipulationCompleted="StackPanel_ManipulationCompleted" Orientation="Horizontal" Margin="12,2,0,4" Height="105" Width="432">
-                                    <Image Source="{Binding Cover}" Width="99" Height="99"/>
-                                    <StackPanel Width="311" Margin="8,-7,0,0">
-                                        <TextBlock Text="{Binding Title}" FontWeight="Bold" TextWrapping="NoWrap" Margin="10,0" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="{StaticResource PhoneFontSizeLarge}"/>
-                                        <TextBlock Text="{Binding Artist}" TextWrapping="NoWrap" Margin="10,-2,10,0" Style="{StaticResource PhoneTextSubtleStyle}" />
-                                    </StackPanel>
+                <phone:LongListSelector x:Name="featuresView" ItemsSource="{Binding AlbumList}" SelectionChanged="featuresView_SelectionChanged">
+                    <phone:LongListSelector.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel ManipulationStarted="StackPanel_ManipulationStarted" ManipulationCompleted="StackPanel_ManipulationCompleted" Orientation="Horizontal" Margin="12,2,0,4" Height="105" Width="432">
+                                <Image Source="{Binding Cover}" Width="99" Height="99"/>
+                                <StackPanel Width="311" Margin="8,-7,0,0">
+                                    <TextBlock Text="{Binding Title}" FontWeight="Bold" TextWrapping="NoWrap" Margin="10,0" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="{StaticResource PhoneFontSizeLarge}"/>
+                                    <TextBlock Text="{Binding Artist}" TextWrapping="NoWrap" Margin="10,-2,10,0" Style="{StaticResource PhoneTextSubtleStyle}" />
                                 </StackPanel>
-                            </DataTemplate>
-                        </phone:LongListSelector.ItemTemplate>
-                    </phone:LongListSelector>
+                            </StackPanel>
+                        </DataTemplate>
+                    </phone:LongListSelector.ItemTemplate>
+
+                    <phone:LongListSelector.ListFooter>
+                        <StackPanel Height="60" HorizontalAlignment="Right" VerticalAlignment="Center">
+                            <TextBlock Tap="TextBlock_Tap" Style="{StaticResource PhoneTextNormalStyle}" Foreground="Green" Text="Load more"/>
+                        </StackPanel>
+                    </phone:LongListSelector.ListFooter>
+
+                </phone:LongListSelector>
             </phone:PanoramaItem>
 
+            <phone:PanoramaItem Header="searching">
+                <Grid>
+                    <StackPanel>
+                        <StackPanel Height="80" Orientation="Horizontal">
+                            <TextBox Text="keyword" HorizontalAlignment="Right" Width="300"></TextBox>
+                            <Button>Search</Button>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </phone:PanoramaItem>
             <!--THANH TIM KIEM, MAC DINH HIEN THI BANG XEP HANG-->
-       
+
         </phone:Panorama>
 
         <!--Uncomment to see an alignment grid to help ensure your controls are
