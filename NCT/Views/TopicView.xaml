@@ -16,11 +16,11 @@
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <!--Pivot Control-->
-        <phone:Pivot Title="MY APPLICATION">
+        <phone:Pivot x:Name="topicViewPivot" Title="MY APPLICATION">
             <!--Pivot item one-->
             <phone:PivotItem Header="topic">
                 <Grid>
-                    <phone:LongListSelector x:Name="Topic" ItemsSource="{Binding ListOfTopic}">
+                    <phone:LongListSelector Name="Topic" ItemsSource="{Binding ListOfTopic}" SelectionChanged="Topic_SelectionChanged">
                         <phone:LongListSelector.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel ManipulationStarted="StackPanel_ManipulationStarted" ManipulationCompleted="StackPanel_ManipulationCompleted" Margin="12,2,0,4" Width="450">
@@ -37,7 +37,21 @@
 
             <!--Pivot item two-->
             <phone:PivotItem Header="album list">
-                <Grid/>
+                <Grid>
+                    <phone:LongListSelector LayoutMode="Grid" GridCellSize="220,300" Name="TopicAlbumList" ItemsSource="{Binding AlbumList}" SelectionChanged="TopicAlbumList_SelectionChanged">
+                        <phone:LongListSelector.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel ManipulationStarted="StackPanel_ManipulationStarted" ManipulationCompleted="StackPanel_ManipulationCompleted" Margin="12,2,0,4" Width="220">
+                                    <Image Source="{Binding Cover}" Width="220" Height="220"/>
+                                    <StackPanel VerticalAlignment="Bottom" Width="220" Margin="0">
+                                        <TextBlock Text="{Binding Title}" FontWeight="Bold" TextWrapping="NoWrap" Margin="0" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="{StaticResource PhoneFontSizeNormal}"/>
+                                        <TextBlock Text="{Binding Artist}" TextWrapping="NoWrap" Margin="10,-2,10,0" Style="{StaticResource PhoneTextSubtleStyle}" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </phone:LongListSelector.ItemTemplate>
+                    </phone:LongListSelector>
+                </Grid>
             </phone:PivotItem>
         </phone:Pivot>
     </Grid>

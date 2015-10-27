@@ -68,7 +68,7 @@ namespace NCT.ViewModels
                 if (cover != value)
                 {
                     cover = value;
-                    NotifyPropertyChanged("TrackCoverChanged");
+                    NotifyPropertyChanged("Cover");
                 }
             }
         }
@@ -85,7 +85,7 @@ namespace NCT.ViewModels
                 if (isSelected != value)
                 {
                     isSelected = value;
-                    NotifyPropertyChanged("Check");
+                    NotifyPropertyChanged("IsSelected");
                 }
             }
         }

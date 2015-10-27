@@ -130,8 +130,27 @@ namespace NCT
             }
         }
 
+        private static ListOfAlbumViewModel topicAlbumList;
+        public static ListOfAlbumViewModel TopicAlbumList
+        {
+            get
+            {
+                if (topicAlbumList == null)
+                    topicAlbumList = new ListOfAlbumViewModel();
+                return topicAlbumList;
+            }
+        }
 
-
+        private static TopicViewModel topicVM;
+        public static TopicViewModel TopicVM
+        {
+            get
+            {
+                if (topicVM == null)
+                    topicVM = new TopicViewModel();
+                return topicVM;
+            }
+        }
 
 
 

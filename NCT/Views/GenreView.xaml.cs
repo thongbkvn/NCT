@@ -60,6 +60,7 @@ namespace NCT.Views
             await App.SongsView.LoadInit(item.LineThree);
             if (rq.Id == Request.Count - 1)
                 albumViewPivot.SelectedIndex = 1;
+            lls.SelectedItem = null;
         }
 
         private void StackPanel_ManipulationStarted(object sender, System.Windows.Input.ManipulationStartedEventArgs e)

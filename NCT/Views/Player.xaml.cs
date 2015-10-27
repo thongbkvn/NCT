@@ -92,7 +92,7 @@ namespace NCT.Views
                 if (audio.CurrentState == MediaElementState.Playing)
                 {
                     audio.Pause();
-                    var sri2 = Application.GetResourceStream(new Uri("Assets/transport.pause.png", UriKind.Relative));
+                    var sri2 = Application.GetResourceStream(new Uri("Assets/transport.play.png", UriKind.Relative));
                     iconPlay.SetSource(sri2.Stream);
                     playbg.ImageSource = iconPlay;
                 }
@@ -100,7 +100,7 @@ namespace NCT.Views
                 {
                     audio.Play();
 
-                    var sri2 = Application.GetResourceStream(new Uri("Assets/transport.play.png", UriKind.Relative));
+                    var sri2 = Application.GetResourceStream(new Uri("Assets/transport.pause.png", UriKind.Relative));
                     iconPlay.SetSource(sri2.Stream);
                     playbg.ImageSource = iconPlay;
                 }
@@ -161,12 +161,11 @@ namespace NCT.Views
 
         private void ApplicationBarIconButton_SelectAllClick(object sender, EventArgs e)
         {
-            //bool tmp = false;
-            //foreach (var i in App.AlbumVM.TrackList)
-            //    if (i.IsSelected == false)
-            //        tmp = true;
+            bool tmp = false;
+            foreach (var i in App.AlbumVM.TrackList)
+                if (i.IsSelected == false)
+                    tmp = true;
 
-            bool tmp = true;
 
             foreach (var i in App.AlbumVM.TrackList)
                 i.IsSelected = tmp;
@@ -204,6 +203,18 @@ namespace NCT.Views
                     catch (Exception) { }      
                 }
             }
+        }
+
+        private void audio_MediaEnded(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                ++currentTrack;
+                if (currentTrack == App.AlbumVM.TrackList.Count)
+                    currentTrack = 0;
+                App.TrackVM.Copy(App.AlbumVM.TrackList.ElementAt(currentTrack));
+            }
+            catch (Exception) { }
         }
     }
 }

@@ -55,7 +55,7 @@ namespace NCT.ViewModels
                 if (albumList != value)
                 {
                     albumList = value;
-                    NotifyPropertyChanged("AlbumListChanged");
+                    NotifyPropertyChanged("AlbumList");
                 }
             }
         }

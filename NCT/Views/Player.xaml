@@ -50,7 +50,7 @@
                         <Image Width ="300" Height="300" Source="{Binding Cover}"></Image>
                         <TextBlock Margin="78,12,30,0" Name="tbTitle" Text="{Binding Title}" Style="{StaticResource PhoneTextNormalStyle}" Height="40"></TextBlock>
                         <TextBlock Margin="78,0,30,0" Name="tbArtist" Text="{Binding Artist}" Style="{StaticResource PhoneTextSmallStyle}" Height="40"></TextBlock>
-                        <MediaElement Name ="audio" Source="{Binding Location}" AutoPlay="True"></MediaElement>
+                        <MediaElement Name ="audio" Source="{Binding Location}" MediaEnded="audio_MediaEnded" AutoPlay="True"></MediaElement>
                     </StackPanel>
                    
                     <StackPanel Grid.Row ="1" Orientation="Horizontal">
@@ -61,7 +61,7 @@
                         </Button>
                         <Button Height="80" Width="80" Name="btPlay" HorizontalAlignment="Center" Click="ButtonPlay_Click" BorderBrush="{StaticResource PhoneContrastForegroundBrush}">
                             <Button.Background>
-                                <ImageBrush x:Name="playbg" Stretch="Fill" ImageSource="/Assets/transport.play.png"/>
+                                <ImageBrush x:Name="playbg" Stretch="Fill" ImageSource="/Assets/transport.pause.png"/>
                             </Button.Background>
                         </Button>
                         <Button Height="80" Width="80" Click="ButtonNext_Click" HorizontalAlignment="Center" BorderBrush="{StaticResource PhoneContrastForegroundBrush}">
