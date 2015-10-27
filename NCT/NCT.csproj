@@ -101,6 +101,7 @@
     <Compile Include="Models\Album.cs" />
     <Compile Include="Models\Artist.cs" />
     <Compile Include="Models\NhacCuaTui.cs" />
+    <Compile Include="Models\Topic.cs" />
     <Compile Include="Models\Track.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\AppResources.Designer.cs">
@@ -111,8 +112,10 @@
     <Compile Include="ViewModels\AlbumViewModel.cs" />
     <Compile Include="ViewModels\ListOfAlbumViewModel.cs" />
     <Compile Include="ViewModels\ItemViewModel.cs" />
+    <Compile Include="ViewModels\ListOfTopicViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\PlayerViewModel.cs" />
+    <Compile Include="ViewModels\TopicViewModel.cs" />
     <Compile Include="ViewModels\TrackListViewModel.cs" />
     <Compile Include="ViewModels\TrackViewModel.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />
@@ -124,6 +127,9 @@
     </Compile>
     <Compile Include="Views\Player.xaml.cs">
       <DependentUpon>Player.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TopicView.xaml.cs">
+      <DependentUpon>TopicView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -147,6 +153,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\TopicView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -161,12 +171,21 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\check.png" />
+    <Content Include="Assets\download.png" />
+    <Content Include="Assets\save.png" />
+    <Content Include="Assets\stop.png" />
+    <Content Include="Assets\transport.ff.png" />
+    <Content Include="Assets\transport.pause.png" />
+    <Content Include="Assets\transport.play.png" />
+    <Content Include="Assets\transport.rew.png" />
+    <Content Include="Assets\transport.stop.png" />
     <Content Include="README_FIRST.txt" />
-    <Content Include="Toolkit.Content\ApplicationBar.Add.png" />
-    <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
-    <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
-    <Content Include="Toolkit.Content\ApplicationBar.Delete.png" />
-    <Content Include="Toolkit.Content\ApplicationBar.Select.png" />
+    <Content Include="ViewModels\Toolkit.Content\ApplicationBar.Add.png" />
+    <Content Include="ViewModels\Toolkit.Content\ApplicationBar.Cancel.png" />
+    <Content Include="ViewModels\Toolkit.Content\ApplicationBar.Check.png" />
+    <Content Include="ViewModels\Toolkit.Content\ApplicationBar.Delete.png" />
+    <Content Include="ViewModels\Toolkit.Content\ApplicationBar.Select.png" />
     <Resource Include="Assets\PanoramaBackground.png" />
     <Content Include="Assets\AlignmentGrid.png" />
     <Content Include="Assets\ApplicationIcon.png">

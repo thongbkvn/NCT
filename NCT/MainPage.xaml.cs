@@ -28,7 +28,16 @@ namespace NCT
 
         // Load data for the ViewModel Items
         protected override async void OnNavigatedTo(NavigationEventArgs e)
-        {                                                                                              
+        {
+
+            #region Debug
+            //var a = await NhacCuaTui.GetListTopicAsync();
+            //var b = a.First();
+            //await b.GetAlbumList();
+
+            #endregion
+
+
             if (!App.ViewModel.IsDataLoaded)
             {
                 App.ViewModel.LoadMainView();

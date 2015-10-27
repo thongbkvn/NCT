@@ -10,6 +10,7 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using NCT.Resources;
 using NCT.ViewModels;
+using System.Collections.ObjectModel;
 
 namespace NCT
 {
@@ -37,6 +38,17 @@ namespace NCT
                 return albumPlayView;
             }  
         }
+
+        private static TopicViewModel topicView;
+        public static TopicViewModel TopicView
+        {
+            get
+            {
+                if (topicView == null)
+                    topicView = new TopicViewModel();
+                return topicView;
+            }
+        }                               
 
         private static TrackListViewModel songsView;
         public static TrackListViewModel SongsView
@@ -107,7 +119,16 @@ namespace NCT
            
         }
 
-
+        private static ListOfTopicViewModel listOfTopic;
+        public static ListOfTopicViewModel ListOfTopic
+        {
+            get
+            {
+                if (listOfTopic == null)
+                    listOfTopic = new ListOfTopicViewModel();
+                return listOfTopic;
+            }
+        }
 
 
 

@@ -24,7 +24,7 @@ namespace NCT.ViewModels
                 if (title != value)
                 {
                     title = value;
-                    NotifyPropertyChanged("TitleOfAlbumChanged");
+                    NotifyPropertyChanged("Title");
                 }
             }
         }
@@ -41,7 +41,7 @@ namespace NCT.ViewModels
                 if (cover != value)
                 {
                     cover = value;
-                    NotifyPropertyChanged("CoverChanged");
+                    NotifyPropertyChanged("Cover");
                 }
             }
         }
@@ -58,7 +58,7 @@ namespace NCT.ViewModels
                 if (artist != value)
                 {
                     artist = value;
-                    NotifyPropertyChanged("ArtistOfAlbumChanged");
+                    NotifyPropertyChanged("Artist");
                 }
             }
         }

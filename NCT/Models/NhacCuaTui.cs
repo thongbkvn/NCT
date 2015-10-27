@@ -172,28 +172,8 @@ namespace NCT.Models
         }
         public static void SearchingFor(string keyword, SearchType type)
         {
-            string[] sarr = Regex.Split(keyword, "\b");
-            string querryString = "q=";
-            for (int i = 0; i < sarr.Length - 1; i++)
-                querryString += sarr + "+";
-            querryString += sarr[sarr.Length - 1];
-            switch (type)
-            {
 
-                case SearchType.All:
-                    querryString = "tim-kiem?" + querryString;
-                    break;
-                case SearchType.Album:
-                    querryString = "tim-kiem/playlist?" + querryString;
-                    break;
-                case SearchType.Song:
-                    break;
-            }
-        }
-        public static async Task<List<Album>> GetRelatedAlbumAsync(Album album)
-        {
-            return null;
-        }
+        }         
         public static async Task<string[]> GetSongDownloadLinkAsync(string link)
         {
             string[] result = new string[2];
@@ -236,5 +216,32 @@ namespace NCT.Models
             //Khong co ket qua
             return null;
         }
+
+        public static async Task<List<Topic>> GetListTopicAsync()
+        {
+            string link = "http://www.nhaccuatui.com/chu-de.html";
+            string response;
+            using (HttpClient hc = new HttpClient())
+            {
+                hc.DefaultRequestHeaders.UserAgent.Add(new Windows.Web.Http.Headers.HttpProductInfoHeaderValue("Mozilla / 5.0(Windows NT 10.0; WOW64) AppleWebKit / 537.36(KHTML, like Gecko) Chrome / 45.0.2454.101 Safari / 537.36"));
+                response = await hc.GetStringAsync(new Uri(link, UriKind.Absolute));
+            }
+
+            HtmlDocument hdoc = new HtmlDocument();
+            hdoc.LoadHtml(response);
+
+            HtmlNode ultag = (from divtags in hdoc.DocumentNode.Descendants("div").Where(x => x.Attributes[0].Value == "fram_select")
+                                           select divtags).First().ChildNodes[1];
+            var topicList = from litag in ultag.ChildNodes.Where(x => x.Name == "li")
+                            select new Topic()
+                            {
+                                Title = litag.ChildNodes[1].ChildNodes[3].ChildNodes[1].InnerText,
+                                Link = litag.ChildNodes[3].Attributes["href"].Value,
+                                Cover = litag.ChildNodes[3].ChildNodes[3].Attributes["src"].Value
+                            };
+            return topicList.ToList();
+
+        }
+
     }
 }

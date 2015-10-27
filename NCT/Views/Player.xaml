@@ -23,11 +23,14 @@
                     <phone:LongListSelector x:Name="playlistView" SelectionChanged="playlistView_SelectionChanged" ItemsSource="{Binding TrackList}">
                         <phone:LongListSelector.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel ManipulationStarted="StackPanel_ManipulationStarted" ManipulationCompleted="StackPanel_ManipulationCompleted" Orientation="Horizontal" Margin="12,2,0,4" Height="80" Width="450">
+                                <StackPanel ManipulationStarted="StackPanel_ManipulationStarted" ManipulationCompleted="StackPanel_ManipulationCompleted" Orientation="Horizontal" Margin="12,2,0,4" Height="70" Width="450">
                                     <Image Source="{Binding Cover}" Width="70" Height="70"/>
-                                    <StackPanel Width="350" Margin="8,-7,0,0">
-                                        <TextBlock Text="{Binding Title}" TextWrapping="NoWrap" Margin="10,0" Style="{StaticResource PhoneTextNormalStyle}" FontSize="{StaticResource PhoneFontSizeLarge}"/>
-                                        <TextBlock Text="{Binding Artist}" TextWrapping="NoWrap" Margin="10,-2,10,0" Style="{StaticResource PhoneTextSubtleStyle}" />
+                                    <StackPanel Width="310" Margin="8,0,0,0">
+                                        <TextBlock Text="{Binding Title}" TextWrapping="NoWrap" Margin="10,0,6,0" Style="{StaticResource PhoneTextNormalStyle}" FontSize="{StaticResource PhoneFontSizeLarge}"/>
+                                        <TextBlock Text="{Binding Artist}" TextWrapping="NoWrap" Margin="10,-2,6,0" Style="{StaticResource PhoneTextSubtleStyle}" />
+                                    </StackPanel>
+                                    <StackPanel>
+                                        <CheckBox Checked="CheckBox_Checked" Unchecked="CheckBox_Checked" IsChecked="{Binding IsSelected, Mode=TwoWay}"></CheckBox>
                                     </StackPanel>
                                 </StackPanel>
                             </DataTemplate>
@@ -40,32 +43,49 @@
             <phone:PivotItem Header="nowplaying">
                 <Grid Name="musicVNView">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="2*"></RowDefinition>
+                        <RowDefinition Height="3*"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <StackPanel Grid.Row="0">
-                        <TextBlock Text="{Binding Title}" Style="{StaticResource PhoneTextLargeStyle}" Height="50"></TextBlock>
-                        <TextBlock Text="{Binding Artist}" Style="{StaticResource PhoneTextSmallStyle}" Height="50"></TextBlock>
-                        <Border BorderBrush="Yellow" BorderThickness="5"  Width="200" Height="200" VerticalAlignment="Center" HorizontalAlignment="Center">
-                            <Image Source="{Binding Cover}"></Image>
-                        </Border>
+                    <StackPanel Name="st" Grid.Row="0">
+                        <Image Width ="300" Height="300" Source="{Binding Cover}"></Image>
+                        <TextBlock Margin="78,12,30,0" Name="tbTitle" Text="{Binding Title}" Style="{StaticResource PhoneTextNormalStyle}" Height="40"></TextBlock>
+                        <TextBlock Margin="78,0,30,0" Name="tbArtist" Text="{Binding Artist}" Style="{StaticResource PhoneTextSmallStyle}" Height="40"></TextBlock>
+                        <MediaElement Name ="audio" Source="{Binding Location}" AutoPlay="True"></MediaElement>
                     </StackPanel>
+                   
                     <StackPanel Grid.Row ="1" Orientation="Horizontal">
-                        <Button Height="80" Click="ButtonPlay_Click">Play</Button>
-                        <Button Height="80" Click="ButtonPause_Click">Pause</Button>
-                        <Button Height="80" Click="ButtonStop_Click">Stop</Button>
-                        <TextBlock Text="{Binding Title}" Style="{StaticResource PhoneTextLargeStyle}" Height="50"></TextBlock>
-                        <TextBlock Text="{Binding Artist}" Style="{StaticResource PhoneTextSmallStyle}" Height="50"></TextBlock>
-
-                        <MediaElement Name="audio" MediaOpened="audio_MediaOpened" Source="{Binding Location}" AutoPlay="True"></MediaElement>
+                        <Button Height="80" Width="80" Margin="70,12,12,12" Click="ButtonPrev_Click" HorizontalAlignment="Center" BorderBrush="{StaticResource PhoneContrastForegroundBrush}">
+                            <Button.Background>
+                                <ImageBrush Stretch="Fill" ImageSource="/Assets/transport.rew.png"/>
+                            </Button.Background>
+                        </Button>
+                        <Button Height="80" Width="80" Name="btPlay" HorizontalAlignment="Center" Click="ButtonPlay_Click" BorderBrush="{StaticResource PhoneContrastForegroundBrush}">
+                            <Button.Background>
+                                <ImageBrush x:Name="playbg" Stretch="Fill" ImageSource="/Assets/transport.play.png"/>
+                            </Button.Background>
+                        </Button>
+                        <Button Height="80" Width="80" Click="ButtonNext_Click" HorizontalAlignment="Center" BorderBrush="{StaticResource PhoneContrastForegroundBrush}">
+                            <Button.Background>
+                                <ImageBrush ImageSource="/Assets/transport.ff.png" Stretch="Fill"/>
+                            </Button.Background>
+                        </Button>
+                        <Button Height="80" Width="80" Click="ButtonStop_Click" HorizontalAlignment="Center" BorderBrush="{StaticResource PhoneContrastForegroundBrush}">
+                            <Button.Background>
+                                <ImageBrush Stretch="Fill" ImageSource="/Assets/stop.png"/>
+                            </Button.Background>
+                        </Button>
                     </StackPanel>
                 </Grid>
             </phone:PivotItem>
 
-            <phone:PivotItem Header="related">
-                <Grid/>
-            </phone:PivotItem>
         </phone:Pivot>
     </Grid>
 
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="False">
+            <shell:ApplicationBarIconButton IconUri="/Assets/download.png" Click="ApplicationBarIconButton_DownloadClick" Text="Download"></shell:ApplicationBarIconButton>
+            <shell:ApplicationBarIconButton IconUri="/Assets/check.png" Click="ApplicationBarIconButton_SelectAllClick" Text="Select All"></shell:ApplicationBarIconButton>
+            <shell:ApplicationBarIconButton IconUri="/Assets/save.png" Click="ApplicationBarIconButton_SaveClick" Text="Save Folder"></shell:ApplicationBarIconButton>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
 </phone:PhoneApplicationPage>

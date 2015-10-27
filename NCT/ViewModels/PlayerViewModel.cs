@@ -21,7 +21,7 @@ namespace NCT.ViewModels
                 if (nowPlayingAlbum != value)
                 {
                     nowPlayingAlbum = value;
-                    NotifyPropertyChanged("NowPlayingListAlbumVMChanged");
+                    NotifyPropertyChanged("NowPlayingAlbum");
                 }
             }
         }

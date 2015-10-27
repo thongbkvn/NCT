@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NCT.Models;
-using System.ComponentModel;
+﻿using System;                
+using NCT.Models;            
 using System.Windows.Media.Imaging;
 using System.Windows;
 
@@ -24,7 +19,7 @@ namespace NCT.ViewModels
                 if (title != value)
                 {
                     title = value;
-                    NotifyPropertyChanged("TitleOfSongChanged");
+                    NotifyPropertyChanged("Title");
                 }
             }
         }
@@ -41,7 +36,7 @@ namespace NCT.ViewModels
                 if (artist != value)
                 {
                     artist = value;
-                    NotifyPropertyChanged("ArtistOfSongChanged");
+                    NotifyPropertyChanged("Artist");
                 }
             }
         }
@@ -57,7 +52,7 @@ namespace NCT.ViewModels
                 if (song != value)
                 {
                     song = value;
-                    NotifyPropertyChanged("SongChanged");
+                    NotifyPropertyChanged("Song");
                 }
             }
         }
@@ -77,7 +72,23 @@ namespace NCT.ViewModels
                 }
             }
         }
-
+        
+        private bool isSelected;
+        public bool IsSelected
+        {
+            get
+            {
+                return isSelected;
+            }
+            set
+            {
+                if (isSelected != value)
+                {
+                    isSelected = value;
+                    NotifyPropertyChanged("Check");
+                }
+            }
+        }
         private string location;
         public string Location
         {
@@ -90,7 +101,7 @@ namespace NCT.ViewModels
                 if (location != value)
                 {
                     location = value;
-                    NotifyPropertyChanged("LocationOfTrackChanged");
+                    NotifyPropertyChanged("Location");
                 }
             }
         }
@@ -116,13 +127,13 @@ namespace NCT.ViewModels
             }
         }
 
-        public void Coppy(TrackViewModel trackvm)
+        public void Copy(TrackViewModel trackvm)
         {
             Title = trackvm.Title;
             Cover = trackvm.Cover;
             Song = trackvm.Song;
             Artist = trackvm.Artist;
-            location = trackvm.Location;
+            Location = trackvm.Location;
         }
     }
 }

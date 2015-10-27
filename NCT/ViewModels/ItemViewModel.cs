@@ -4,9 +4,7 @@ using System.Diagnostics;
 using System.Net;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
+using System.Windows.Input;       
 
 namespace NCT.ViewModels
 {
@@ -28,7 +26,7 @@ namespace NCT.ViewModels
                 if (value != content)
                 {
                     content = value;
-                    NotifyPropertyChanged("ContentChanged");
+                    NotifyPropertyChanged("Content");
                 }
             }
         }
