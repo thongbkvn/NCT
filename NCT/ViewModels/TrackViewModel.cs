@@ -1,7 +1,8 @@
-﻿using System;                
-using NCT.Models;            
+﻿using System;
+using NCT.Models;
 using System.Windows.Media.Imaging;
 using System.Windows;
+using System.Threading.Tasks;
 
 namespace NCT.ViewModels
 {
@@ -127,13 +128,27 @@ namespace NCT.ViewModels
             }
         }
 
-        public void Copy(TrackViewModel trackvm)
+        public void Coppy(TrackViewModel trackvm)
         {
             Title = trackvm.Title;
             Cover = trackvm.Cover;
             Song = trackvm.Song;
             Artist = trackvm.Artist;
             Location = trackvm.Location;
+            App.GlobalMediaElement.Source = new Uri(App.TrackVM.Location, UriKind.Absolute);
+        }
+
+        public async Task GetDetailAsync()
+        {
+            await song.GetTrackDetailAsync();
+            Title = song.Title;
+            Artist = song.Artist;
+            Location = song.Location;
+            if (song.Image != null)
+            {
+                Cover = new BitmapImage();
+                Cover.UriSource = new Uri(song.Image);
+            }
         }
     }
 }

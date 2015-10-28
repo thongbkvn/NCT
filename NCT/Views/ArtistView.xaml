@@ -46,7 +46,7 @@
             <!--Pivot item two-->
             <phone:PivotItem Header="songs">
                 <Grid>
-                    <phone:LongListSelector Name="songsView" ItemsSource="{Binding TrackList}" ItemRealized="songsView_ItemRealized">
+                    <phone:LongListSelector Name="songsView" SelectionChanged="songsView_SelectionChanged" ItemsSource="{Binding TrackList}" ItemRealized="songsView_ItemRealized">
                         <phone:LongListSelector.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel ManipulationStarted="StackPanel_ManipulationStarted" ManipulationCompleted="StackPanel_ManipulationCompleted" Margin="12,2,0,4">

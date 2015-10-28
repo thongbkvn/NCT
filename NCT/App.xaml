@@ -15,7 +15,13 @@
             <Setter Property="FontSize" Value="{StaticResource PanoramaItemHeaderFontSize}"/>
             <Setter Property="CharacterSpacing" Value="-35"/>
         </Style>
-        
+
+
+
+
+        <MediaElement x:Key="GlobalMedia"></MediaElement>
+
+
         <local:LocalizedStrings xmlns:local="clr-namespace:NCT" x:Key="LocalizedStrings"/>
     </Application.Resources>
 

@@ -29,22 +29,14 @@ namespace NCT
         // Load data for the ViewModel Items
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-
-            #region Debug
-            //var a = await NhacCuaTui.GetListTopicAsync();
-            //var b = a.First();
-            //await b.GetAlbumList();
-
-            //await NhacCuaTui.GetListOfHotArtistAsync();
-            #endregion
-
-
+              
             if (!App.ViewModel.IsDataLoaded)
             {
                 App.ViewModel.LoadMainView();
             }
             if (!App.FeaturesVM.IsDataLoaded)
                 await App.FeaturesVM.LoadDataFeature("http://www.nhaccuatui.com/playlist/playlist-moi.html", 5);
+            featuresView.ScrollTo(App.FeaturesVM.AlbumList.First());
         }
 
         private void collectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -11,6 +11,7 @@ using Microsoft.Phone.Shell;
 using NCT.Resources;
 using NCT.ViewModels;
 using System.Collections.ObjectModel;
+using System.Windows.Controls;
 
 namespace NCT
 {
@@ -180,6 +181,12 @@ namespace NCT
 
 
 
+
+        public static MediaElement GlobalMediaElement
+        {
+            get { return Current.Resources["GlobalMedia"] as MediaElement; }
+        }
+
         /// <summary>
         /// Provides easy access to the root frame of the Phone Application.
         /// </summary>
@@ -193,7 +200,6 @@ namespace NCT
         {
             // Global handler for uncaught exceptions.
             UnhandledException += Application_UnhandledException;
-
             // Standard XAML initialization
             InitializeComponent();
 
@@ -222,6 +228,7 @@ namespace NCT
                 // and consume battery power when the user is not using the phone.
                 PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
             }
+            
 
         }
 

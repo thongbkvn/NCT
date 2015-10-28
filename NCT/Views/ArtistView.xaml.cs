@@ -63,5 +63,27 @@ namespace NCT.Views
             if (e.ItemKind == LongListSelectorItemKind.ListFooter)
                 await App.ArtistVM.LoadMoreTrackAsync();
         }
+
+        private bool isProcessing = false;
+        private async void songsView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            LongListSelector lls = sender as LongListSelector;
+            if (lls.SelectedItem == null)
+                return;
+            if (isProcessing == true)
+                return;
+            isProcessing = true;
+            MessageBox.Show("Please wait for a few seconds");
+            AlbumViewModel tmp = new AlbumViewModel() { Title = App.ArtistVM.Name };
+            foreach (var track in App.ArtistVM.TrackList)
+            {
+                await track.GetDetailAsync();
+                tmp.TrackList.Add(track);
+            }
+            App.PlayerPlaylistArg = tmp;
+            NavigationService.Navigate(new Uri("/Views/Player.xaml", UriKind.Relative));
+            isProcessing = false;
+            lls.SelectedItem = null;
+        }
     }
 }

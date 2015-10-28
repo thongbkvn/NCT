@@ -43,10 +43,10 @@ namespace NCT.Views
 
         private void Pivot_Loaded(object sender, RoutedEventArgs e)
         {
-
+            App.GlobalMediaElement.MediaEnded += GlobalMediaElement_MediaEnded;
         }
+                                             
 
-        
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {                                        
             if (App.PlayerPlaylistArg != null)
@@ -54,7 +54,7 @@ namespace NCT.Views
                 App.AlbumVM.Coppy(App.PlayerPlaylistArg);
                 if (App.PlayerPlaylistArg.TrackList == null || App.PlayerPlaylistArg.TrackList.Count == 0)
                     await App.AlbumVM.LoadTrackList();
-                App.TrackVM.Copy(App.AlbumVM.TrackList.First());
+                App.TrackVM.Coppy(App.AlbumVM.TrackList.First());
             }
         }
 
@@ -72,7 +72,7 @@ namespace NCT.Views
             foreach (var track in App.AlbumVM.TrackList)
                 if (tmp.Location == track.Location)
                     currentTrack = App.AlbumVM.TrackList.IndexOf(track);
-            App.TrackVM.Copy(tmp);
+            App.TrackVM.Coppy(tmp);
             lls.SelectedItem = null;
         }
 
@@ -81,7 +81,7 @@ namespace NCT.Views
         {
             try
             {
-                audio.Stop();
+                App.GlobalMediaElement.Stop();
             }
             catch (Exception) { }                      
         }
@@ -89,16 +89,16 @@ namespace NCT.Views
         private void ButtonPlay_Click(object sender, RoutedEventArgs e)
         {   try
             {
-                if (audio.CurrentState == MediaElementState.Playing)
+                if (App.GlobalMediaElement.CurrentState == MediaElementState.Playing)
                 {
-                    audio.Pause();
+                    App.GlobalMediaElement.Pause();
                     var sri2 = Application.GetResourceStream(new Uri("Assets/transport.play.png", UriKind.Relative));
                     iconPlay.SetSource(sri2.Stream);
                     playbg.ImageSource = iconPlay;
                 }
                 else
                 {
-                    audio.Play();
+                    App.GlobalMediaElement.Play();
 
                     var sri2 = Application.GetResourceStream(new Uri("Assets/transport.pause.png", UriKind.Relative));
                     iconPlay.SetSource(sri2.Stream);
@@ -115,7 +115,7 @@ namespace NCT.Views
                 ++currentTrack;
                 if (currentTrack == App.AlbumVM.TrackList.Count)
                     currentTrack = 0;
-                App.TrackVM.Copy(App.AlbumVM.TrackList.ElementAt(currentTrack));
+                App.TrackVM.Coppy(App.AlbumVM.TrackList.ElementAt(currentTrack));
             }
             catch (Exception) { }
         }
@@ -127,7 +127,7 @@ namespace NCT.Views
                 --currentTrack;
                 if (currentTrack < 0)
                     currentTrack = App.AlbumVM.TrackList.Count - 1;
-                App.TrackVM.Copy(App.AlbumVM.TrackList.ElementAt(currentTrack));
+                App.TrackVM.Coppy(App.AlbumVM.TrackList.ElementAt(currentTrack));
             }
             catch (Exception) { }
         }
@@ -205,14 +205,14 @@ namespace NCT.Views
             }
         }
 
-        private void audio_MediaEnded(object sender, RoutedEventArgs e)
+        public void GlobalMediaElement_MediaEnded(object sender, RoutedEventArgs e)
         {
             try
             {
                 ++currentTrack;
                 if (currentTrack == App.AlbumVM.TrackList.Count)
                     currentTrack = 0;
-                App.TrackVM.Copy(App.AlbumVM.TrackList.ElementAt(currentTrack));
+                App.TrackVM.Coppy(App.AlbumVM.TrackList.ElementAt(currentTrack));
             }
             catch (Exception) { }
         }

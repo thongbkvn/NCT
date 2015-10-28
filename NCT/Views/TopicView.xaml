@@ -20,7 +20,7 @@
             <!--Pivot item one-->
             <phone:PivotItem Header="topic">
                 <Grid>
-                    <phone:LongListSelector Name="Topic" ItemsSource="{Binding topicList}" SelectionChanged="Topic_SelectionChanged">
+                    <phone:LongListSelector Name="Topic" ItemsSource="{Binding TopicList}" SelectionChanged="Topic_SelectionChanged">
                         <phone:LongListSelector.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel ManipulationStarted="StackPanel_ManipulationStarted" ManipulationCompleted="StackPanel_ManipulationCompleted" Margin="12,2,0,4" Width="450">

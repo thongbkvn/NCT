@@ -102,7 +102,7 @@ namespace NCT.Models
             }
         }
 
-        public async void GetTrackDetailAsync()
+        public async Task GetTrackDetailAsync()
         {
             if (info == null)
                 return;
