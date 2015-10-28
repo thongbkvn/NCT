@@ -110,8 +110,10 @@
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\AlbumViewModel.cs" />
+    <Compile Include="ViewModels\ArtistViewModel.cs" />
     <Compile Include="ViewModels\ListOfAlbumViewModel.cs" />
     <Compile Include="ViewModels\ItemViewModel.cs" />
+    <Compile Include="ViewModels\ListOfArtistViewModel.cs" />
     <Compile Include="ViewModels\ListOfTopicViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\PlayerViewModel.cs" />
@@ -119,6 +121,9 @@
     <Compile Include="ViewModels\TrackListViewModel.cs" />
     <Compile Include="ViewModels\TrackViewModel.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />
+    <Compile Include="Views\ArtistListView.xaml.cs">
+      <DependentUpon>ArtistListView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ArtistView.xaml.cs">
       <DependentUpon>ArtistView.xaml</DependentUpon>
     </Compile>
@@ -138,6 +143,10 @@
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
     <Page Include="MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ArtistListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -173,6 +182,8 @@
   <ItemGroup>
     <Content Include="Assets\check.png" />
     <Content Include="Assets\download.png" />
+    <Content Include="Assets\favs.png" />
+    <Content Include="Assets\feature.search.png" />
     <Content Include="Assets\save.png" />
     <Content Include="Assets\stop.png" />
     <Content Include="Assets\transport.ff.png" />

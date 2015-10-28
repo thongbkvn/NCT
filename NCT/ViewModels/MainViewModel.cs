@@ -32,10 +32,8 @@ namespace NCT.ViewModels
             // Sample data; replace with real data
             this.Items.Add(new ItemViewModel() { Content = "nowplaying", LineTwo = "/Views/Player.xaml"});
             this.Items.Add(new ItemViewModel() { Content = "genre", LineTwo = "/Views/GenreView.xaml"});
-            this.Items.Add(new ItemViewModel() { Content = "artist", LineTwo = "/Views/ArtistView.xaml"});
-            this.Items.Add(new ItemViewModel() { Content = "topic", LineTwo = "/Views/TopicView.xaml"});
-            //this.Items.Add(new ItemViewModel() { Content = "favourite", LineTwo = "Maecenas praesent accumsan bibendum"});
-            //this.Items.Add(new ItemViewModel() { Content = "history", LineTwo = "Dictumst eleifend facilisi faucibus"});
+            this.Items.Add(new ItemViewModel() { Content = "artist", LineTwo = "/Views/ArtistListView.xaml"});
+            this.Items.Add(new ItemViewModel() { Content = "topic", LineTwo = "/Views/TopicView.xaml"});                 
             this.IsDataLoaded = true;
         }
 

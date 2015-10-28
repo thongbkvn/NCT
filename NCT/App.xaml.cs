@@ -152,9 +152,28 @@ namespace NCT
             }
         }
 
+        private static ListOfArtistViewModel listOfArtistVM;
+        public static ListOfArtistViewModel ListOfArtistVM
+        {
+            get
+            {
+                if (listOfArtistVM == null)
+                    listOfArtistVM = new ListOfArtistViewModel();
+                return listOfArtistVM;
+            }
+        }
 
 
-
+        private static ArtistViewModel artistVM;
+        public static ArtistViewModel ArtistVM
+        {
+            get
+            {
+                if (artistVM == null)
+                    artistVM = new ArtistViewModel();
+                return artistVM;
+            }
+        }
 
 
 

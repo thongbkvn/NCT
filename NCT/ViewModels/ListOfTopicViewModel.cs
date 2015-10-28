@@ -11,33 +11,36 @@ namespace NCT.ViewModels
     public class ListOfTopicViewModel : ViewModel
     {
 
-        private ObservableCollection<TopicViewModel> listOfTopic = new ObservableCollection<TopicViewModel>();
+        private ObservableCollection<TopicViewModel> topicList = new ObservableCollection<TopicViewModel>();
 
-        public  ObservableCollection<TopicViewModel> ListOfTopic
+        public  ObservableCollection<TopicViewModel> TopicList
         {
             get
             {
-                return listOfTopic;
+                return topicList;
             }
             set
             {
-                if (listOfTopic != value)
+                if (topicList != value)
                 {
-                    listOfTopic = value;
+                    topicList = value;
                     NotifyPropertyChanged("ListOfTopic");
                 }
             }
         }
 
-        public async Task LoadData()
+        public async Task LoadDataAsync()
         {
-            if (listOfTopic == null)
-                listOfTopic = new ObservableCollection<TopicViewModel>();
-            ListOfTopic.Clear();
-            var topicList = await NhacCuaTui.GetListTopicAsync();
-            foreach (Topic topic in topicList)
+            if (this.topicList == null)
+                this.topicList = new ObservableCollection<TopicViewModel>();
+            if (TopicList.Count == 0)
             {
-                ListOfTopic.Add(new TopicViewModel(topic));
+                TopicList.Clear();
+                var topicList = await NhacCuaTui.GetListTopicAsync();
+                foreach (Topic topic in topicList)
+                {
+                    TopicList.Add(new TopicViewModel(topic));
+                }
             }
         }
 

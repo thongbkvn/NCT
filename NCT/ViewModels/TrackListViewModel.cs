@@ -36,8 +36,7 @@ namespace NCT.ViewModels
         //        }
         //    }
         //}
-        string link;
-        int page = 1;
+        string link;  
         public TrackListViewModel()
         {
             TrackList = new ObservableCollection<TrackViewModel>();

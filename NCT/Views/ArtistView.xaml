@@ -6,30 +6,66 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    SupportedOrientations="Portrait" Orientation="Portrait"
-    mc:Ignorable="d"
+    SupportedOrientations="Portrait"  Orientation="Portrait"
     shell:SystemTray.IsVisible="True">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+        <!--Pivot Control-->
+        <phone:Pivot Title="MY APPLICATION" Name="artistView">
+            <!--Pivot item one-->
+            <phone:PivotItem Header="albums">
+                <Grid>
+                    <phone:LongListSelector Name="albumslls" LayoutMode="Grid" GridCellSize="220,300" ItemRealized="albumsView_ItemRealized" ItemsSource="{Binding AlbumList}" SelectionChanged="albumsView_SelectionChanged">
+                        <phone:LongListSelector.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel ManipulationStarted="StackPanel_ManipulationStarted" ManipulationCompleted="StackPanel_ManipulationCompleted" Margin="12,2,0,4" Width="220">
+                                    <Image Source="{Binding Cover}" Width="220" Height="220"/>
+                                    <StackPanel VerticalAlignment="Bottom" Width="220" Margin="0">
+                                        <TextBlock Text="{Binding Title}" FontWeight="Bold" TextWrapping="NoWrap" Margin="0" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="{StaticResource PhoneFontSizeNormal}"/>
+                                        <TextBlock Text="{Binding Artist}" TextWrapping="NoWrap" Margin="0,-2,10,0" Style="{StaticResource PhoneTextSubtleStyle}" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </phone:LongListSelector.ItemTemplate>
+                        <phone:LongListSelector.ListFooter>
+                            <Grid Margin="12,30,12,0" Height="60" VerticalAlignment="Bottom">
+                                <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center">
+                                    <TextBlock Foreground="Green" Text="Loading..."/>
+                                </StackPanel>
+                            </Grid>
+                        </phone:LongListSelector.ListFooter>
+                    </phone:LongListSelector>
+                </Grid>
+            </phone:PivotItem>
 
-        <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="MY APPLICATION" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock Text="page name" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
-        </StackPanel>
-
-        <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-
-        </Grid>
+            <!--Pivot item two-->
+            <phone:PivotItem Header="songs">
+                <Grid>
+                    <phone:LongListSelector Name="songsView" ItemsSource="{Binding TrackList}" ItemRealized="songsView_ItemRealized">
+                        <phone:LongListSelector.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel ManipulationStarted="StackPanel_ManipulationStarted" ManipulationCompleted="StackPanel_ManipulationCompleted" Margin="12,2,0,4">
+                                    <TextBlock Text="{Binding Title}" FontWeight="Bold" TextWrapping="Wrap" Margin="10,6,10,5" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="{StaticResource PhoneFontSizeLarge}"/>
+                                    <TextBlock Text="{Binding Artist}" TextWrapping="NoWrap" Margin="10,-2,10,0" Style="{StaticResource PhoneTextSubtleStyle}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </phone:LongListSelector.ItemTemplate>
+                        <phone:LongListSelector.ListFooter>
+                        <Grid Margin="12,30,12,0" Height="60" VerticalAlignment="Bottom">
+                            <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center">
+                                <TextBlock Foreground="Green" Text="Loading..."/>
+                            </StackPanel>
+                        </Grid>
+                        </phone:LongListSelector.ListFooter>
+                    </phone:LongListSelector>
+                </Grid>
+            </phone:PivotItem>
+        </phone:Pivot>
     </Grid>
-
+    
 </phone:PhoneApplicationPage>

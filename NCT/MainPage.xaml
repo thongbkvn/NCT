@@ -14,7 +14,7 @@
     SupportedOrientations="Portrait"  Orientation="Portrait"
     shell:SystemTray.IsVisible="False">
 
-    
+
     <!--Navigation animation-->
     <toolkit:TransitionService.NavigationInTransition>
         <toolkit:NavigationInTransition>
@@ -36,9 +36,9 @@
             </toolkit:NavigationOutTransition.Forward>
         </toolkit:NavigationOutTransition>
     </toolkit:TransitionService.NavigationOutTransition>
-    
-    
-    
+
+
+
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
 
@@ -91,8 +91,12 @@
                 <Grid>
                     <StackPanel>
                         <StackPanel Height="80" Orientation="Horizontal">
-                            <TextBox Text="keyword" HorizontalAlignment="Right" Width="300"></TextBox>
-                            <Button>Search</Button>
+                            <TextBox HorizontalAlignment="Right" Width="340"></TextBox>
+                            <Button Height="80" Width="80" BorderBrush="{StaticResource PhoneTextBoxBrush}" >
+                                <Button.Background>
+                                    <ImageBrush Stretch="Fill" ImageSource="/Assets/feature.search.png"/>
+                                </Button.Background>
+                            </Button>
                         </StackPanel>
                     </StackPanel>
                 </Grid>

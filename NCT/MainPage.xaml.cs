@@ -35,6 +35,7 @@ namespace NCT
             //var b = a.First();
             //await b.GetAlbumList();
 
+            //await NhacCuaTui.GetListOfHotArtistAsync();
             #endregion
 
 

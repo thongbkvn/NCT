@@ -12,7 +12,7 @@ namespace NCT.Models
 {
     public class NhacCuaTui
     {
-        public enum SearchType {All = 0, Album = 1, Song = 2, Singer = 4}
+        public enum SearchType { All = 0, Album = 1, Song = 2, Singer = 4 }
         public static async Task<Album> GetTopTrackListAsync(string link)
         {
             Album album = new Album();
@@ -62,7 +62,7 @@ namespace NCT.Models
             try
             {
                 HttpClient hc = new HttpClient();
-                
+
                 hc.DefaultRequestHeaders.UserAgent.Add(new Windows.Web.Http.Headers.HttpProductInfoHeaderValue("Mozilla / 5.0(Windows NT 10.0; WOW64) AppleWebKit / 537.36(KHTML, like Gecko) Chrome / 45.0.2454.101 Safari / 537.36"));
                 string htmlPage = await hc.GetStringAsync(new Uri(link));
                 string xmlLink = Regex.Split(htmlPage, "amp;file=")[1].Split('\"')[0];
@@ -104,7 +104,7 @@ namespace NCT.Models
             string response = await hc.GetStringAsync(new Uri(link));
             HtmlDocument hdoc = new HtmlDocument();
             hdoc.LoadHtml(response);
-            hc.Dispose();           
+            hc.Dispose();
 
             //tai sao lai x.Attributes["class"] lai khong duoc
             var divtag = (from divtags in hdoc.DocumentNode.Descendants("div").Where(x => x.Attributes[0].Value == "fram_select")
@@ -132,8 +132,8 @@ namespace NCT.Models
             hc.Dispose();
             HtmlDocument hdoc = new HtmlDocument();
             hdoc.LoadHtml(response);
-            HtmlNode ultag = (from ultags in hdoc.DocumentNode.Descendants("ul").Where(x=> x.Attributes["id"].Value == "recommendZone")
-                        select ultags).First();
+            HtmlNode ultag = (from ultags in hdoc.DocumentNode.Descendants("ul").Where(x => x.Attributes["id"].Value == "recommendZone")
+                              select ultags).First();
             var relatedTrackList = from litag in ultag.ChildNodes.Where(x => x.Name == "li")
                                    select new Track()
                                    {
@@ -149,7 +149,7 @@ namespace NCT.Models
         public static async Task<List<Track>> GetTrackByGenreAsync(string link, int page)
         {
             if (page != 0)
-                link = link.Remove(link.Length-4) + page + ".html";
+                link = link.Remove(link.Length - 4) + page + ".html";
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.UserAgent.Add(new Windows.Web.Http.Headers.HttpProductInfoHeaderValue("Mozilla / 5.0(Windows NT 10.0; WOW64) AppleWebKit / 537.36(KHTML, like Gecko) Chrome / 45.0.2454.101 Safari / 537.36"));
             string response = await client.GetStringAsync(new Uri(link));
@@ -159,21 +159,21 @@ namespace NCT.Models
 
             //Chon ra the chua danh sach bai hat
             var trackList = from ultag in doc.DocumentNode.Descendants("ul").Where(x => x.Attributes["class"] != null && x.Attributes["class"].Value == "list_item_music")
-                        from litag in ultag.ChildNodes.Where(x => x.Name == "li")
-                        from h3tag in litag.ChildNodes[1].ChildNodes
-                         select new Track()
-                         {
-                             Title = h3tag.ChildNodes[0].InnerText,
-                             Info = h3tag.ChildNodes[0].Attributes["href"].Value,
-                             ArtistLink = h3tag.ChildNodes[2].Attributes["href"].Value,
-                             Artist = h3tag.ChildNodes[2].InnerText
-                         };    
+                            from litag in ultag.ChildNodes.Where(x => x.Name == "li")
+                            from h3tag in litag.ChildNodes[1].ChildNodes
+                            select new Track()
+                            {
+                                Title = h3tag.ChildNodes[0].InnerText,
+                                Info = h3tag.ChildNodes[0].Attributes["href"].Value,
+                                ArtistLink = h3tag.ChildNodes[2].Attributes["href"].Value,
+                                Artist = h3tag.ChildNodes[2].InnerText
+                            };
             return trackList.ToList();
         }
         public static void SearchingFor(string keyword, SearchType type)
         {
 
-        }         
+        }
         public static async Task<string[]> GetSongDownloadLinkAsync(string link)
         {
             string[] result = new string[2];
@@ -189,7 +189,7 @@ namespace NCT.Models
                 StringBuilder sb = new StringBuilder(rep.Split('\"')[9]);
                 sb.Replace("\\", "");
                 if (sb.ToString().Remove(4) == "http")
-                    result[1] = sb.ToString(); 
+                    result[1] = sb.ToString();
                 else
                     result[1] = null;
 
@@ -231,7 +231,7 @@ namespace NCT.Models
             hdoc.LoadHtml(response);
 
             HtmlNode ultag = (from divtags in hdoc.DocumentNode.Descendants("div").Where(x => x.Attributes[0].Value == "fram_select")
-                                           select divtags).First().ChildNodes[1];
+                              select divtags).First().ChildNodes[1];
             var topicList = from litag in ultag.ChildNodes.Where(x => x.Name == "li")
                             select new Topic()
                             {
@@ -242,6 +242,57 @@ namespace NCT.Models
             return topicList.ToList();
 
         }
+
+        public static async Task<List<Artist>[]> GetListOfHotArtistAsync()
+        {
+            string link = "http://www.nhaccuatui.com/nghe-si.html";
+            string response;
+            List<Artist> hotArtistList= new List<Artist>();
+            List<Artist> topArtist = new List<Artist>();
+            using (HttpClient hc = new HttpClient())
+            {
+                hc.DefaultRequestHeaders.UserAgent.Add(new Windows.Web.Http.Headers.HttpProductInfoHeaderValue("Mozilla / 5.0(Windows NT 10.0; WOW64) AppleWebKit / 537.36(KHTML, like Gecko) Chrome / 45.0.2454.101 Safari / 537.36"));
+                response = await hc.GetStringAsync(new Uri(link, UriKind.Absolute));
+            }
+            HtmlDocument hdoc = new HtmlDocument();
+            hdoc.LoadHtml(response);
+
+            HtmlNode ultag = (from ultags in hdoc.DocumentNode.Descendants("ul").Where(x => x.Attributes["class"].Value == "list-singer-item")
+                              select ultags).First();
+            var listSinger = from litag in ultag.ChildNodes.Where(x => x.Name == "li")
+                             select new Artist()
+                             {
+                                 Name = litag.ChildNodes[0].Attributes["title"].Value,
+                                 Info = litag.ChildNodes[0].Attributes["href"].Value,
+                                 Cover = litag.ChildNodes[0].ChildNodes[1].Attributes["src"].Value
+                             };
+            HtmlNode ultag2 = (from ultags in hdoc.DocumentNode.Descendants("ul").Where(x => x.Attributes["class"].Value == "list-singer-item-more")
+                              select ultags).First();
+            var listSinger2 = from litag in ultag2.ChildNodes.Where(x => x.Name == "li")
+                             select new Artist()
+                             {
+                                 Name = litag.ChildNodes[0].ChildNodes[0].Attributes["title"].Value,
+                                 Info = litag.ChildNodes[0].ChildNodes[0].Attributes["href"].Value
+                             };              
+
+            hotArtistList.AddRange(listSinger2);
+
+
+            HtmlNode ultag3 = (from ultags in hdoc.DocumentNode.Descendants("ul").Where(x => x.Attributes["class"].Value == "item-top")
+                              select ultags).First();
+            var listSinger3 = from litag in ultag3.ChildNodes.Where(x => x.Name == "li")
+                              select new Artist()
+                              {
+                                  Cover = litag.ChildNodes[1].ChildNodes[2].Attributes["src"].Value,
+                                  Name = litag.ChildNodes[2].ChildNodes[0].InnerText,
+                                  Info = litag.ChildNodes[2].ChildNodes[0].Attributes["href"].Value
+                              };
+
+            topArtist.AddRange(listSinger3);
+            topArtist.AddRange(listSinger);
+            return new List<Artist>[] { topArtist, hotArtistList };
+        }
+
 
     }
 }

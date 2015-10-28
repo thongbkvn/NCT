@@ -33,9 +33,9 @@ namespace NCT.Views
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (App.ListOfTopic.ListOfTopic.Count == 0)
-                await App.ListOfTopic.LoadData();
-            var tmp = App.ListOfTopic.ListOfTopic.First();
+            if (App.ListOfTopic.TopicList.Count == 0)
+                await App.ListOfTopic.LoadDataAsync();
+            var tmp = App.ListOfTopic.TopicList.First();
             await tmp.LoadData();
             App.TopicVM.AlbumList = tmp.AlbumList;
         }
