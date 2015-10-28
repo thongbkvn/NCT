@@ -30,7 +30,7 @@ namespace NCT.ViewModels
         public void LoadMainView()
         {
             // Sample data; replace with real data
-            this.Items.Add(new ItemViewModel() { Content = "nowplaying", LineTwo = "/Views/Player.xaml"});
+            this.Items.Add(new ItemViewModel() { Content = "nowplaying", LineTwo = "/Views/Player.xaml?key=special"});
             this.Items.Add(new ItemViewModel() { Content = "genre", LineTwo = "/Views/GenreView.xaml"});
             this.Items.Add(new ItemViewModel() { Content = "artist", LineTwo = "/Views/ArtistListView.xaml"});
             this.Items.Add(new ItemViewModel() { Content = "topic", LineTwo = "/Views/TopicView.xaml"});                 

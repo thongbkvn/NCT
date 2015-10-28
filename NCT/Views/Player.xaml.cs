@@ -48,13 +48,22 @@ namespace NCT.Views
                                              
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
-        {                                        
+        {
+            //Neu navigate tu nowplaying trang chinh thi thoi
+            try
+            {
+                if (NavigationContext.QueryString["key"] == "special")
+                    return;
+            }
+            catch (Exception) { }                                  
             if (App.PlayerPlaylistArg != null)
             {
                 App.AlbumVM.Coppy(App.PlayerPlaylistArg);
                 if (App.PlayerPlaylistArg.TrackList == null || App.PlayerPlaylistArg.TrackList.Count == 0)
+                {
                     await App.AlbumVM.LoadTrackList();
-                App.TrackVM.Coppy(App.AlbumVM.TrackList.First());
+                    App.TrackVM.Coppy(App.AlbumVM.TrackList.First());
+                }
             }
         }
 
